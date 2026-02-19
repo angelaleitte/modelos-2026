@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maré Serena Beach Resort | Luxo e Natureza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #2c4c58; /* Azul Petróleo Profundo */
+            --accent: #d4a373;  /* Tom de Areia/Dourado */
+            --bg-light: #fdfaf6;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--primary);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.2));
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .gallery-img {
+            transition: transform 0.5s ease;
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header id="main-nav" class="fixed w-full z-50 transition-all duration-500 py-6 px-8 flex justify-between items-center text-white">
+        <div class="text-2xl font-serif tracking-widest uppercase font-bold">
+            Maré Serena
+        </div>
+        
+        <nav class="hidden lg:flex space-x-8 text-sm uppercase tracking-widest font-medium">
+            <a href="#inicio" class="nav-link">Início</a>
+            <a href="#acomodacoes" class="nav-link">Acomodações</a>
+            <a href="#sobre" class="nav-link">Sobre</a>
+            <a href="#experiencias" class="nav-link">Experiências</a>
+            <a href="#gastronomia" class="nav-link">Gastronomia</a>
+            <a href="#contato" class="nav-link">Contato</a>
+        </nav>
+
+        <div class="flex items-center space-x-6">
+            <button class="bg-white text-primary px-6 py-2 text-xs uppercase tracking-tighter hover:bg-[#d4a373] hover:text-white transition-colors duration-300 font-bold">
+                Reservar Agora
+            </button>
+            <button class="lg:hidden" id="mobile-menu-btn">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2000" alt="Praia ao Amanhecer" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl mb-6 opacity-0 translate-y-10 animate-fade-up" style="animation: fadeUp 1.2s forwards;">
+                Maré Serena
+            </h1>
+            <p class="text-lg md:text-xl font-light tracking-widest uppercase mb-10 opacity-0 animate-fade-up" style="animation: fadeUp 1.2s 0.3s forwards;">
+                Onde o mar encontra o conforto
+            </p>
+            <div class="flex flex-col md:flex-row justify-center gap-4 opacity-0 animate-fade-up" style="animation: fadeUp 1.2s 0.6s forwards;">
+                <a href="#acomodacoes" class="border border-white px-8 py-3 uppercase text-xs tracking-widest hover:bg-white hover:text-primary transition-all duration-300">Nossas Acomodações</a>
+                <a href="#contato" class="bg-[#d4a373] px-8 py-3 uppercase text-xs tracking-widest hover:bg-[#c19262] transition-all duration-300">Descubra Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Acomodações -->
+    <section id="acomodacoes" class="py-24 px-8 bg-white reveal">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl mb-4">Refúgios de Serenidade</h2>
+                <div class="w-20 h-px bg-[#d4a373] mx-auto mb-6"></div>
+                <p class="text-gray-500 max-w-2xl mx-auto italic">Cada detalhe foi pensado para integrar o luxo à simplicidade da natureza.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Suite 1 -->
+                <div class="group cursor-pointer">
+                    <div class="overflow-hidden mb-4 aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80&w=800" alt="Suíte Oceano Azul" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <h3 class="text-2xl mb-2">Suíte Oceano Azul</h3>
+                    <p class="text-sm text-gray-600 mb-4">Vista panorâmica para o horizonte com varanda privativa e rede.</p>
+                    <button class="text-xs uppercase tracking-widest border-b border-[#d4a373] pb-1 hover:text-[#d4a373] transition-colors">Saiba Mais</button>
+                </div>
+                <!-- Suite 2 -->
+                <div class="group cursor-pointer">
+                    <div class="overflow-hidden mb-4 aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&q=80&w=800" alt="Loft Solar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <h3 class="text-2xl mb-2">Loft Solar</h3>
+                    <p class="text-sm text-gray-600 mb-4">Design contemporâneo banhado por luz natural e jardim interno.</p>
+                    <button class="text-xs uppercase tracking-widest border-b border-[#d4a373] pb-1 hover:text-[#d4a373] transition-colors">Saiba Mais</button>
+                </div>
+                <!-- Suite 3 -->
+                <div class="group cursor-pointer">
+                    <div class="overflow-hidden mb-4 aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=800" alt="Vilarejo Tropical" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <h3 class="text-2xl mb-2">Vilarejo Tropical</h3>
+                    <p class="text-sm text-gray-600 mb-4">Privacidade total em bangalôs cercados por vegetação nativa.</p>
+                    <button class="text-xs uppercase tracking-widest border-b border-[#d4a373] pb-1 hover:text-[#d4a373] transition-colors">Saiba Mais</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre o Resort -->
+    <section id="sobre" class="py-24 bg-[#f8f5f0] reveal">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&q=80&w=1000" alt="Resort Vista Aérea" class="z-10 relative">
+                <div class="absolute -bottom-10 -right-10 w-64 h-64 bg-white p-4 hidden md:block shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=500" alt="Detalhe do Resort" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div>
+                <span class="text-[#d4a373] uppercase tracking-widest text-sm mb-4 block">Nossa Essência</span>
+                <h2 class="text-4xl md:text-5xl mb-8 leading-tight">Onde o tempo desacelera e a alma descansa.</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed">
+                    O Maré Serena Beach Resort nasceu de um sonho: criar um refúgio onde a arquitetura se curva à natureza. Localizado na mística Praia Paradisíaca, oferecemos uma experiência pé na areia genuína, longe do caos urbano.
+                </p>
+                <p class="text-gray-600 mb-8 leading-relaxed">
+                    Aqui, o luxo é o silêncio, o conforto é a brisa e a exclusividade é o nosso compromisso com cada hóspede. Descubra um novo conceito de hospitalidade.
+                </p>
+                <div class="grid grid-cols-2 gap-8 py-8 border-t border-gray-200">
+                    <div>
+                        <h4 class="font-bold text-3xl mb-1">100%</h4>
+                        <p class="text-xs uppercase text-gray-400">Energia Limpa</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-3xl mb-1">15</h4>
+                        <p class="text-xs uppercase text-gray-400">Suítes Exclusivas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiências -->
+    <section id="experiencias" class="py-24 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                <div class="max-w-xl">
+                    <h2 class="text-4xl md:text-5xl mb-4">Experiências Imersivas</h2>
+                    <p class="text-gray-500 italic">Vá além da hospedagem e conecte-se com o destino.</p>
+                </div>
+                <div class="flex gap-4">
+                    <button class="p-2 border border-gray-200 hover:bg-primary hover:text-white transition-colors"><i data-lucide="arrow-left"></i></button>
+                    <button class="p-2 border border-gray-200 hover:bg-primary hover:text-white transition-colors"><i data-lucide="arrow-right"></i></button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-8 border border-gray-50 hover:shadow-2xl transition-all duration-300">
+                    <div class="mb-6 flex justify-center text-[#d4a373]"><i data-lucide="sunset" size="48"></i></div>
+                    <h3 class="text-xl mb-4">Sunset Yoga</h3>
+                    <p class="text-sm text-gray-500">Prática guiada ao entardecer com vista para o mar infinito.</p>
+                </div>
+                <div class="text-center p-8 border border-gray-50 hover:shadow-2xl transition-all duration-300">
+                    <div class="mb-6 flex justify-center text-[#d4a373]"><i data-lucide="waves" size="48"></i></div>
+                    <h3 class="text-xl mb-4">Passeio de Jangada</h3>
+                    <p class="text-sm text-gray-500">Explore as piscinas naturais e recifes de corais da região.</p>
+                </div>
+                <div class="text-center p-8 border border-gray-50 hover:shadow-2xl transition-all duration-300">
+                    <div class="mb-6 flex justify-center text-[#d4a373]"><i data-lucide="flower-2" size="48"></i></div>
+                    <h3 class="text-xl mb-4">Spa Relaxante</h3>
+                    <p class="text-sm text-gray-500">Tratamentos holísticos usando ingredientes orgânicos locais.</p>
+                </div>
+                <div class="text-center p-8 border border-gray-50 hover:shadow-2xl transition-all duration-300">
+                    <div class="mb-6 flex justify-center text-[#d4a373]"><i data-lucide="utensils" size="48"></i></div>
+                    <h3 class="text-xl mb-4">Jantar Privativo</h3>
+                    <p class="text-sm text-gray-500">Um menu degustação exclusivo servido à luz de velas na areia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gastronomia (Parallax) -->
+    <section id="gastronomia" class="parallax relative h-[80vh] flex items-center" style="background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=2000');">
+        <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
+            <div class="max-w-md bg-white p-12 reveal">
+                <span class="text-[#d4a373] uppercase tracking-widest text-xs mb-4 block">Cozinha de Origem</span>
+                <h2 class="text-4xl mb-6">Restaurante Sabor de Sal</h2>
+                <p class="text-gray-600 mb-8">Nossa gastronomia celebra os frutos do mar frescos e a riqueza da culinária tropical, com um toque de sofisticação contemporânea.</p>
+                <button class="bg-primary text-white px-8 py-3 uppercase text-xs tracking-widest hover:bg-accent transition-all">Explorar Menu</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eventos & Casamentos -->
+    <section class="py-24 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-8 text-center mb-16">
+            <h2 class="text-4xl md:text-5xl mb-6">Celebre Momentos Únicos</h2>
+            <p class="text-gray-500 max-w-3xl mx-auto italic">Do "Sim" eterno às celebrações mais íntimas, transformamos seu evento em poesia.</p>
+        </div>
+        
+        <div class="max-w-5xl mx-auto px-8 overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-gray-200">
+                        <th class="py-6 uppercase text-xs tracking-widest text-gray-400">Pacote</th>
+                        <th class="py-6 uppercase text-xs tracking-widest text-gray-400">Capacidade</th>
+                        <th class="py-6 uppercase text-xs tracking-widest text-gray-400">Incluso</th>
+                        <th class="py-6"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="py-8 font-serif text-xl">Casamento na Praia</td>
+                        <td class="py-8 text-sm text-gray-600">Até 120 convidados</td>
+                        <td class="py-8 text-sm text-gray-600">Altar, Decoração, Buffet Premium</td>
+                        <td class="py-8 text-right"><button class="text-[#d4a373] uppercase text-xs font-bold tracking-widest">Consultar</button></td>
+                    </tr>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="py-8 font-serif text-xl">Elopement Wedding</td>
+                        <td class="py-8 text-sm text-gray-600">Apenas o casal</td>
+                        <td class="py-8 text-sm text-gray-600">Celebrante, Jantar Romântico, Spa</td>
+                        <td class="py-8 text-right"><button class="text-[#d4a373] uppercase text-xs font-bold tracking-widest">Consultar</button></td>
+                    </tr>
+                    <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td class="py-8 font-serif text-xl">Business Retreat</td>
+                        <td class="py-8 text-sm text-gray-600">Até 30 pessoas</td>
+                        <td class="py-8 text-sm text-gray-600">Sala Equipada, Coffee Break, Team Building</td>
+                        <td class="py-8 text-right"><button class="text-[#d4a373] uppercase text-xs font-bold tracking-widest">Consultar</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="py-12 px-4 reveal">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&q=80&w=600" class="gallery-img h-64 w-full object-cover rounded-lg" onclick="openLightbox(this.src)">
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600" class="gallery-img h-64 w-full object-cover rounded-lg" onclick="openLightbox(this.src)">
+            <img src="https://images.unsplash.com/photo-1437719417032-8595fd9e9dc6?auto=format&fit=crop&q=80&w=600" class="gallery-img h-64 w-full object-cover rounded-lg" onclick="openLightbox(this.src)">
+            <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&q=80&w=600" class="gallery-img h-64 w-full object-cover rounded-lg" onclick="openLightbox(this.src)">
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section class="py-24 bg-primary text-white text-center reveal">
+        <div class="max-w-3xl mx-auto px-8">
+            <i data-lucide="quote" class="mx-auto mb-8 text-[#d4a373]" size="48"></i>
+            <p class="text-2xl md:text-3xl font-serif mb-8 leading-relaxed italic">
+                "Um lugar onde o tempo parece não passar. A equipe nos fez sentir em casa e a vista do Loft Solar é algo que levarei para sempre na memória."
+            </p>
+            <span class="block uppercase tracking-widest text-sm font-bold">— Maria & João Silva</span>
+            <div class="flex justify-center gap-2 mt-8">
+                <div class="w-2 h-2 rounded-full bg-[#d4a373]"></div>
+                <div class="w-2 h-2 rounded-full bg-white/30"></div>
+                <div class="w-2 h-2 rounded-full bg-white/30"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Contato -->
+    <section id="contato" class="py-24 bg-white reveal">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-4xl md:text-5xl mb-8">Planeje sua Estadia</h2>
+                <p class="text-gray-500 mb-12">Entre em contato conosco para orçamentos personalizados, reservas de grupos ou dúvidas especiais.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start space-x-4">
+                        <i data-lucide="map-pin" class="text-[#d4a373]"></i>
+                        <p class="text-sm">Av. das Palmeiras, 1000 - Praia Paradisíaca, Oceânia - BR</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i data-lucide="phone" class="text-[#d4a373]"></i>
+                        <p class="text-sm">+55 (82) 99999-0000</p>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i data-lucide="mail" class="text-[#d4a373]"></i>
+                        <p class="text-sm">contato@mareserena.com.br</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="contactForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="Nome Completo" required class="w-full border-b border-gray-300 py-3 focus:border-[#d4a373] outline-none transition-colors">
+                    <input type="email" placeholder="E-mail" required class="w-full border-b border-gray-300 py-3 focus:border-[#d4a373] outline-none transition-colors">
+                </div>
+                <input type="tel" placeholder="Telefone" class="w-full border-b border-gray-300 py-3 focus:border-[#d4a373] outline-none transition-colors">
+                <textarea rows="4" placeholder="Sua Mensagem" required class="w-full border-b border-gray-300 py-3 focus:border-[#d4a373] outline-none transition-colors"></textarea>
+                
+                <button type="submit" class="w-full bg-primary text-white py-4 uppercase text-xs tracking-widest font-bold hover:bg-accent transition-all duration-300">
+                    Enviar Mensagem
+                </button>
+                <p id="formStatus" class="hidden text-green-600 text-sm italic mt-2 text-center">Mensagem enviada com sucesso! Em breve entraremos em contato.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1a2d35] text-white/70 py-16 px-8 text-center md:text-left">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div>
+                <h3 class="text-white text-xl font-serif mb-6 uppercase tracking-widest">Maré Serena</h3>
+                <p class="text-sm leading-relaxed">Sustentabilidade e luxo em perfeita harmonia. Onde seus momentos se transformam em memórias inesquecíveis.</p>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Explore</h4>
+                <ul class="text-sm space-y-4">
+                    <li><a href="#acomodacoes" class="hover:text-[#d4a373]">Acomodações</a></li>
+                    <li><a href="#experiencias" class="hover:text-[#d4a373]">Experiências</a></li>
+                    <li><a href="#gastronomia" class="hover:text-[#d4a373]">Gastronomia</a></li>
+                    <li><a href="#" class="hover:text-[#d4a373]">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Social</h4>
+                <div class="flex justify-center md:justify-start space-x-6">
+                    <a href="#" class="hover:text-white"><i data-lucide="instagram"></i></a>
+                    <a href="#" class="hover:text-white"><i data-lucide="facebook"></i></a>
+                    <a href="#" class="hover:text-white"><i data-lucide="youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-widest mb-6">Newsletter</h4>
+                <p class="text-xs mb-4">Receba novidades e promoções exclusivas.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Seu e-mail" class="bg-white/10 border-none px-4 py-2 text-sm w-full outline-none focus:bg-white/20">
+                    <button class="bg-[#d4a373] px-4 py-2 text-white"><i data-lucide="send"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto border-t border-white/10 mt-16 pt-8 text-[10px] uppercase tracking-widest flex flex-col md:flex-row justify-between items-center opacity-50">
+            <p>&copy; 2024 Maré Serena Beach Resort. Todos os direitos reservados.</p>
+            <p>Feito com paixão pela hospitalidade.</p>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" class="max-w-[90%] max-h-[90vh] object-contain shadow-2xl">
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white', 'text-primary', 'shadow-lg', 'py-4');
+                nav.classList.remove('py-6', 'text-white');
+            } else {
+                nav.classList.remove('bg-white', 'text-primary', 'shadow-lg', 'py-4');
+                nav.classList.add('py-6', 'text-white');
+            }
+            
+            // Reveal on Scroll
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const revealTop = reveal.getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (revealTop < windowHeight - revealPoint) {
+                    reveal.classList.add('active');
+                }
+            });
+        });
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const status = document.getElementById('formStatus');
+            status.classList.remove('hidden');
+            this.reset();
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 5000);
+        });
+
+        // Lightbox Functions
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+        }
+
+        // Trigger first reveals on load
+        window.dispatchEvent(new Event('scroll'));
+
+        // Mobile Menu Logic (Basic)
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            alert('Menu mobile em desenvolvimento. Navegue usando as âncoras na versão Desktop para melhor experiência!');
+        });
+    </script>
+
+    <style>
+        /* Fade Up Animation */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-up {
+            animation-fill-mode: forwards;
+        }
+    </style>
+</body>
+</html>
