@@ -1,14 +1,14 @@
+# Use the official Nginx image
 FROM nginx:alpine
 
-# Remove config padrão
-RUN rm /etc/nginx/conf.d/default.conf
+# Copy the Nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copia config customizada
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copia arquivos HTML
+# Copy the website files to the Nginx html directory
 COPY . /usr/share/nginx/html
 
+# Expose port 80
 EXPOSE 80
 
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
