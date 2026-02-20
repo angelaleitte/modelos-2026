@@ -1,6 +1,9 @@
 version: '3'
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "80:80"
+    command: ["sh", "-c", "nginx -g 'daemon off;'"]
