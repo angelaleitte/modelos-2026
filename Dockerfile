@@ -1,17 +1,14 @@
-# Usa Nginx Alpine
 FROM nginx:alpine
 
-# Remove o config padrão
+# Remove config padrão
 RUN rm /etc/nginx/conf.d/default.conf
 
-# Copia sua configuração personalizada
+# Copia config customizada
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Copia todo o conteúdo do projeto para servir no container
+# Copia arquivos HTML
 COPY . /usr/share/nginx/html
 
-# Expõe a porta interna 80
 EXPOSE 80
 
-# Inicia o Nginx
 CMD ["nginx", "-g", "daemon off;"]
