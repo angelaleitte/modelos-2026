@@ -7,8 +7,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy the website files to the Nginx html directory
 COPY . /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 80
+# Expose port 81
+EXPOSE 81
 
 # Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
