@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angela Leitte | Designer & Estrategista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f5;
+            --accent-color: #444;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Efeito de Grão (Film Grain) */
+        .grain {
+            position: fixed;
+            top: -150%;
+            left: -150%;
+            width: 300%;
+            height: 300%;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png');
+            opacity: 0.04;
+            pointer-events: none;
+            animation: grain 8s steps(10) infinite;
+            z-index: 9999;
+        }
+
+        @keyframes grain {
+            0%, 100% { transform:translate(0, 0) }
+            10% { transform:translate(-5%, -10%) }
+            20% { transform:translate(-15%, 5%) }
+            30% { transform:translate(7%, -25%) }
+            40% { transform:translate(-5%, 25%) }
+            50% { transform:translate(-15%, 10%) }
+            60% { transform:translate(15%, 0%) }
+            70% { transform:translate(0, 15%) }
+            80% { transform:translate(3%, 35%) }
+            90% { transform:translate(-10%, 10%) }
+        }
+
+        /* Tipografia e Layout */
+        .hero-title {
+            font-weight: 900;
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            font-size: clamp(4rem, 15vw, 12rem);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 0.6;
+        }
+
+        .project-card {
+            border-top: 1px solid var(--accent-color);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .project-card:hover {
+            background-color: #111;
+            padding-left: 1.5rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilo do Rodapé */
+        .footer-big-text {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        /* Imagens e Placeholders */
+        .img-container {
+            background: #1a1a1a;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: filter 0.5s ease, transform 0.8s ease;
+        }
+
+        .project-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 18vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grain"></div>
+
+    <!-- Navegação -->
+    <nav class="fixed top-0 w-full z-50 p-6 mix-blend-difference">
+        <div class="flex justify-between items-center max-w-7xl mx-auto">
+            <a href="#" class="font-bold text-lg tracking-tighter">AL.</a>
+            <div class="space-x-8 text-sm uppercase tracking-widest hidden md:flex">
+                <a href="#work" class="nav-link">Projetos</a>
+                <a href="#about" class="nav-link">Sobre</a>
+                <a href="#contact" class="nav-link">Contato</a>
+            </div>
+            <button class="md:hidden">Menu</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="min-h-screen flex flex-col justify-end p-6 md:p-12 pb-24">
+        <div class="max-w-7xl mx-auto w-full">
+            <p class="text-sm uppercase tracking-[0.3em] mb-8 opacity-60">Designer Multidisciplinar & Estrategista Digital</p>
+            <h1 class="hero-title uppercase">ANGELA<br>LEITTE</h1>
+            <div class="flex flex-col md:flex-row justify-between mt-12 items-start md:items-end gap-8">
+                <p class="max-w-md text-xl font-light leading-relaxed opacity-80">
+                    Transformando visões em experiências digitais marcantes através de design minimalista e foco total no usuário.
+                </p>
+                <div class="flex gap-4">
+                    <span class="px-4 py-2 border border-white/20 rounded-full text-xs uppercase tracking-widest">Disponível para Projetos</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Section Work -->
+    <section id="work" class="py-24 px-6 md:px-12 bg-white text-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-16">
+                <h2 class="text-4xl md:text-6xl font-black uppercase tracking-tighter">Trabalhos<br>Selecionados</h2>
+                <p class="text-sm opacity-50 hidden md:block">01 — 04</p>
+            </div>
+
+            <!-- Lista de Projetos -->
+            <div class="space-y-0">
+                <!-- Projeto 1 -->
+                <div class="project-card py-12 flex flex-col md:flex-row gap-8 items-center reveal">
+                    <div class="w-full md:w-1/2">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=2067&auto=format&fit=crop" alt="Projeto de Luminária">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 flex flex-col justify-between h-full">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest opacity-40">Identidade Visual • 2024</span>
+                            <h3 class="text-3xl md:text-5xl font-bold mt-2 uppercase tracking-tight">Studio Aura</h3>
+                        </div>
+                        <p class="mt-6 text-lg max-w-sm opacity-70">Redefinindo a presença digital para uma marca de iluminação arquitetônica de luxo.</p>
+                        <a href="#" class="mt-8 inline-block font-bold border-b-2 border-black pb-1 self-start">Ver Caso</a>
+                    </div>
+                </div>
+
+                <!-- Projeto 2 -->
+                <div class="project-card py-12 flex flex-col md:flex-row-reverse gap-8 items-center reveal">
+                    <div class="w-full md:w-1/2">
+                        <div class="img-container">
+                            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964&auto=format&fit=crop" alt="Interface Mobile">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 flex flex-col justify-between h-full">
+                        <div>
+                            <span class="text-xs uppercase tracking-widest opacity-40">UI/UX Design • 2023</span>
+                            <h3 class="text-3xl md:text-5xl font-bold mt-2 uppercase tracking-tight">Vanguarda App</h3>
+                        </div>
+                        <p class="mt-6 text-lg max-w-sm opacity-70">Uma interface brutalista para a nova geração de investidores de arte contemporânea.</p>
+                        <a href="#" class="mt-8 inline-block font-bold border-b-2 border-black pb-1 self-start">Ver Caso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre / Marquee -->
+    <section id="about" class="py-32 overflow-hidden border-t border-white/10">
+        <div class="flex whitespace-nowrap animate-marquee mb-24">
+            <span class="text-[15vw] font-black uppercase tracking-tighter opacity-10 leading-none px-4">Minimalismo • Estratégia • Inovação • Estética • </span>
+            <span class="text-[15vw] font-black uppercase tracking-tighter opacity-10 leading-none px-4">Minimalismo • Estratégia • Inovação • Estética • </span>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <h2 class="text-4xl md:text-5xl font-bold uppercase mb-8">A Filosofia do Menos</h2>
+                <p class="text-xl opacity-70 leading-relaxed">
+                    Com mais de 10 anos de experiência, Angela Leitte acredita que o design não deve apenas ser visto, mas sentido. Cada pixel é uma decisão estratégica para remover o ruído e amplificar a mensagem principal da marca.
+                </p>
+            </div>
+            <div class="flex justify-center md:justify-end reveal">
+                <div class="w-64 h-64 bg-zinc-800 rounded-full flex items-center justify-center p-8 border border-white/20 hover:scale-110 transition-transform duration-500">
+                    <p class="text-center text-xs font-bold uppercase tracking-widest">Baseada em<br>São Paulo, BR</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé / Contato -->
+    <footer id="contact" class="bg-white text-black pt-32 pb-12 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-24 reveal">
+                <p class="text-sm uppercase tracking-widest mb-6 font-bold">Pronto para começar?</p>
+                <a href="mailto:hello@angelaleitte.com" class="footer-big-text uppercase leading-none block hover:italic transition-all">
+                    VAMOS CRIAR<br>ALGO JUNTOS
+                </a>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between pt-12 border-t border-black/10 gap-8">
+                <div class="flex gap-8 text-sm font-bold uppercase tracking-widest">
+                    <a href="#" class="hover:opacity-50">LinkedIn</a>
+                    <a href="#" class="hover:opacity-50">Behance</a>
+                    <a href="#" class="hover:opacity-50">Instagram</a>
+                </div>
+                <div class="text-sm opacity-40 italic">
+                    © 2024 Angela Leitte. Design & Code by Gemini.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Efeito de Reveal no Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        
+        // Trigger inicial
+        reveal();
+
+        // Animação Simples de Marquee
+        const marquee = document.querySelector('.animate-marquee');
+        let x = 0;
+        function animate() {
+            x -= 0.5;
+            if (x <= -marquee.offsetWidth / 2) x = 0;
+            marquee.style.transform = `translateX(${x}px)`;
+            requestAnimationFrame(animate);
+        }
+        // Descomente se quiser usar JS para o marquee, caso contrário CSS resolve.
+        // animate();
+    </script>
+
+    <style>
+        /* CSS para o Marquee */
+        .animate-marquee {
+            display: flex;
+            width: fit-content;
+            animation: scroll-marquee 30s linear infinite;
+        }
+
+        @keyframes scroll-marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Suavização de scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</body>
+</html>
